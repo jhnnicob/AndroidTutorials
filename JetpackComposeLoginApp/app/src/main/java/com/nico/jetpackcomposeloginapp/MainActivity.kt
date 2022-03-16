@@ -109,7 +109,9 @@ fun LoginScreen(navController: NavController) {
             horizontalArrangement = Arrangement.Center
         ) {
             Text("Don't have an account? ")
-            Text(" Register", modifier = Modifier.clickable { navController.navigate("register_screen") })
+            Text(
+                " Register",
+                modifier = Modifier.clickable { navController.navigate("register_screen") })
         }
 
         Spacer(modifier = Modifier.padding(vertical = 5.dp))
@@ -141,7 +143,9 @@ fun RegisterScreen(navController: NavController) {
     }
 
     Column(
-        modifier = Modifier.padding(horizontal = 40.dp)
+        modifier = Modifier
+            .background(color = Color.White)
+            .padding(horizontal = 40.dp)
     ) {
 
         Spacer(modifier = Modifier.padding(top = 20.dp))
