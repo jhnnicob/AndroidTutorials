@@ -66,6 +66,9 @@ fun LoginScreen(navController: NavController) {
         mutableStateOf("")
     }
 
+    val isEnabled =
+        username.value.isNotEmpty() && password.value.isNotEmpty()
+
     Column(
         modifier = Modifier
             .background(color = Color.White)
@@ -118,6 +121,7 @@ fun LoginScreen(navController: NavController) {
 
         OutlinedButton(
             onClick = { },
+            enabled = isEnabled,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(10.dp)
@@ -141,6 +145,9 @@ fun RegisterScreen(navController: NavController) {
     val password = remember {
         mutableStateOf("")
     }
+
+    val isEnabled =
+        username.value.isNotEmpty() && email.value.isNotEmpty() && password.value.isNotEmpty()
 
     Column(
         modifier = Modifier
@@ -210,6 +217,7 @@ fun RegisterScreen(navController: NavController) {
 
         OutlinedButton(
             onClick = { },
+            enabled = isEnabled,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(10.dp)
