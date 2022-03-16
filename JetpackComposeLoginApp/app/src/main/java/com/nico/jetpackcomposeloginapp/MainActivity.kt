@@ -12,6 +12,8 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBack
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -55,6 +57,15 @@ fun NavigationHost() {
 
 @Composable
 fun LoginScreen(navController: NavController) {
+
+    val username = remember {
+        mutableStateOf("")
+    }
+
+    val password = remember {
+        mutableStateOf("")
+    }
+
     Column(
         modifier = Modifier
             .background(color = Color.White)
@@ -76,8 +87,8 @@ fun LoginScreen(navController: NavController) {
         Spacer(modifier = Modifier.padding(vertical = 10.dp))
 
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = username.value,
+            onValueChange = { username.value = it },
             placeholder = { Text("Username", fontSize = 18.sp) },
             modifier = Modifier.fillMaxWidth()
         )
@@ -85,8 +96,8 @@ fun LoginScreen(navController: NavController) {
         Spacer(modifier = Modifier.padding(5.dp, 5.dp))
 
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = password.value,
+            onValueChange = { password.value = it },
             placeholder = { Text("Password", fontSize = 18.sp) },
             modifier = Modifier.fillMaxWidth(),
         )
@@ -116,6 +127,19 @@ fun LoginScreen(navController: NavController) {
 
 @Composable
 fun RegisterScreen(navController: NavController) {
+
+    val username = remember {
+        mutableStateOf("")
+    }
+
+    val email = remember {
+        mutableStateOf("")
+    }
+
+    val password = remember {
+        mutableStateOf("")
+    }
+
     Column(
         modifier = Modifier.padding(horizontal = 40.dp)
     ) {
@@ -144,8 +168,8 @@ fun RegisterScreen(navController: NavController) {
         Spacer(modifier = Modifier.padding(vertical = 10.dp))
 
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = username.value,
+            onValueChange = { username.value = it },
             placeholder = { Text("Username", fontSize = 18.sp) },
             modifier = Modifier.fillMaxWidth()
         )
@@ -153,8 +177,8 @@ fun RegisterScreen(navController: NavController) {
         Spacer(modifier = Modifier.padding(5.dp, 5.dp))
 
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = email.value,
+            onValueChange = { email.value = it },
             placeholder = { Text("Email", fontSize = 18.sp) },
             modifier = Modifier.fillMaxWidth()
         )
@@ -162,8 +186,8 @@ fun RegisterScreen(navController: NavController) {
         Spacer(modifier = Modifier.padding(5.dp, 5.dp))
 
         OutlinedTextField(
-            value = "",
-            onValueChange = {},
+            value = password.value,
+            onValueChange = { password.value = it },
             placeholder = { Text("Password", fontSize = 18.sp) },
             modifier = Modifier.fillMaxWidth(),
         )
