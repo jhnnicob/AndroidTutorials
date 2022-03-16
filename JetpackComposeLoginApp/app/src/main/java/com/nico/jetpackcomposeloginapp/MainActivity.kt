@@ -19,6 +19,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import com.nico.jetpackcomposeloginapp.ui.theme.JetpackComposeLoginAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -26,16 +30,35 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             JetpackComposeLoginAppTheme {
-                LoginScreen()
+                NavigationHost()
             }
         }
     }
 }
 
 @Composable
-fun LoginScreen() {
+fun NavigationHost() {
+    val navController = rememberNavController()
+    NavHost(
+        navController = navController,
+        startDestination = "login_screen"
+    ) {
+        composable(route = "login_screen") {
+            LoginScreen(navController)
+        }
+
+        composable(route = "register_screen") {
+            RegisterScreen(navController)
+        }
+    }
+}
+
+@Composable
+fun LoginScreen(navController: NavController) {
     Column(
-        modifier = Modifier.background(color = Color.White).padding(horizontal = 40.dp)
+        modifier = Modifier
+            .background(color = Color.White)
+            .padding(horizontal = 40.dp)
     ) {
 
         Spacer(modifier = Modifier.weight(1f))
@@ -75,7 +98,7 @@ fun LoginScreen() {
             horizontalArrangement = Arrangement.Center
         ) {
             Text("Don't have an account? ")
-            Text(" Register", modifier = Modifier.clickable { })
+            Text(" Register", modifier = Modifier.clickable { navController.navigate("register_screen") })
         }
 
         Spacer(modifier = Modifier.padding(vertical = 5.dp))
@@ -92,17 +115,19 @@ fun LoginScreen() {
 }
 
 @Composable
-fun Register() {
+fun RegisterScreen(navController: NavController) {
     Column(
         modifier = Modifier.padding(horizontal = 40.dp)
     ) {
 
         Spacer(modifier = Modifier.padding(top = 20.dp))
 
-        Icon(
-            imageVector = Icons.Outlined.ArrowBack,
-            contentDescription = "Arrow Back"
-        )
+        IconButton(onClick = { navController.navigate("login_screen") }) {
+            Icon(
+                imageVector = Icons.Outlined.ArrowBack,
+                contentDescription = "Arrow Back"
+            )
+        }
 
         Spacer(modifier = Modifier.weight(1f))
 
@@ -150,7 +175,7 @@ fun Register() {
             horizontalArrangement = Arrangement.Center
         ) {
             Text("Already Have an account? ")
-            Text(" Login", modifier = Modifier.clickable { })
+            Text(" Login", modifier = Modifier.clickable { navController.navigate("login_screen") })
         }
 
         Spacer(modifier = Modifier.padding(vertical = 5.dp))
@@ -169,15 +194,17 @@ fun Register() {
 @Preview(showSystemUi = true)
 @Composable
 fun LoginPreview() {
+    val navController = rememberNavController()
     JetpackComposeLoginAppTheme {
-        LoginScreen()
+        LoginScreen(navController)
     }
 }
 
 @Preview(showSystemUi = true)
 @Composable
 fun RegisterPreview() {
+    val navController = rememberNavController()
     JetpackComposeLoginAppTheme {
-        Register()
+        RegisterScreen(navController)
     }
 }
